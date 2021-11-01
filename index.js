@@ -20,25 +20,38 @@ class ExcelScript {
     this.xlsx,
     this.posts = [],
     this.post = {};
-    this.fileName = file,
-    this.DataShop = {
-     ...DataShop
-    },
-    this.DataProduct = {
-     ...DataProduct
+    this.fileName = file;
+    if(Object(DataShop).length !== 'undefined'){
+     this.DataShop = {
+      ...DataShop
+     }
+    }
+    if(Object(DataShop).length !== 'undefined'){
+     this.DataProduct = {
+      ...DataProduct
+     }
     }
     this.upCase(this.DataShop, this.DataProduct)
     this.worksheet
     this.reqParse(this.fileName)
-    this.method(this.worksheet, this.post)
-    this.productMethod(this.worksheet, this.DataProduct)
+    if(Object(DataShop).length !== 'undefined'){
+     this.method(this.worksheet, this.post)
+    }
+    if(Object(DataProduct).length !== 'undefined'){
+     this.productMethod(this.worksheet, this.DataProduct)
+    }
+ 
  }
  upCase(DataShop, DataProduct){
-  for(let i in DataShop){
-   this.DataShop[i] = DataShop[i].toUpperCase();
+  if(Object(DataShop).length !== 'undefined'){
+   for(let i in DataShop){
+    this.DataShop[i] = DataShop[i].toUpperCase();
+   }
   }
-  for(let i in DataProduct){
-   this.DataProduct[i] = DataProduct[i].toUpperCase();
+  if(Object(DataProduct).length !== 'undefined'){
+   for(let i in DataProduct){
+    this.DataProduct[i] = DataProduct[i].toUpperCase();
+   }
   }
  }
  reqParse(file){
